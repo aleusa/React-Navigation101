@@ -7,8 +7,10 @@
  */
 
 import * as React from 'react';
+import { useLayoutEffect, useEffect, useState } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   SafeAreaView,
   ScrollView,
@@ -17,6 +19,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Button,
 } from 'react-native';
 
 import {
@@ -54,6 +57,7 @@ const Section = ({children, title}): Node => {
 };
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -64,17 +68,95 @@ const App: () => Node = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator 
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={({ navigation, route }) => ({
+            title: 'My home',
+          })}
+        />
+        <Stack.Screen name="Details" component={DetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
+  return (    
+  <Tab.Navigator>
+    <Tab.Screen name="Feed" component={Feed} />
+    <Tab.Screen name="Messages" component={Messages} />
+  </Tab.Navigator>
+  );
+}
+
+function DetailsScreen({ route, navigation }) {
+  /* 2. Get the param */
+  const { itemId, otherParam } = route.params;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
+      <Text>Details Screen</Text>
+      <Text>itemId: {JSON.stringify(itemId)}</Text>
+      <Text>otherParam: {JSON.stringify(otherParam)}</Text>
+      <Button
+        title="Go to Details... again"
+        onPress={() =>
+          navigation.push('Details', {
+            itemId: Math.floor(Math.random() * 100),
+            otherParam: 'Hello',
+          })
+        }
+      />
+      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function Feed({navigation}) {
+  const [count, setCount] = React.useState(0);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+      ),
+    });
+  }, [navigation]);
+
+  return (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Feed</Text>
+    <Text>Count: {count}</Text>
+    <Button
+      title="Go to Details"
+      onPress={() => {
+        /* 1. Navigate to the Details route with params */
+        navigation.navigate('Details', {
+          itemId: 86,
+          otherParam: 'Hola',
+        });
+      }}
+    />
+  </View>
+  );
+}
+
+function Messages() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Messages!</Text>
     </View>
   );
 }
