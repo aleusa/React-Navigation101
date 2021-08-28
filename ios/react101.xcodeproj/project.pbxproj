@@ -36,6 +36,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = react101/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = react101/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = react101/main.m; sourceTree = "<group>"; };
+		35A35E3E26DABE4200BBA80A /* react101.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = react101.entitlements; path = react101/react101.entitlements; sourceTree = "<group>"; };
 		45384683E903FCE7C5047EDE /* Pods-react101.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react101.debug.xcconfig"; path = "Target Support Files/Pods-react101/Pods-react101.debug.xcconfig"; sourceTree = "<group>"; };
 		74907372473566F3DCE195F6 /* Pods-react101-react101Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react101-react101Tests.release.xcconfig"; path = "Target Support Files/Pods-react101-react101Tests/Pods-react101-react101Tests.release.xcconfig"; sourceTree = "<group>"; };
 		7691CC5FB2903984CD68C2D4 /* libPods-react101-react101Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react101-react101Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +87,7 @@
 		13B07FAE1A68108700A75B9A /* react101 */ = {
 			isa = PBXGroup;
 			children = (
+				35A35E3E26DABE4200BBA80A /* react101.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,7 +147,6 @@
 				81ED86FF95D049D2490AEE06 /* Pods-react101-react101Tests.debug.xcconfig */,
 				74907372473566F3DCE195F6 /* Pods-react101-react101Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -484,6 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = react101/react101.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = react101/Info.plist;
@@ -510,6 +512,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = react101/react101.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = react101/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
